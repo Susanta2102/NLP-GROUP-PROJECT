@@ -12,7 +12,7 @@ This project focuses on automating the extraction and enforcement of security po
 
 ### Prerequisites
 To run the project, you will need the following software:
-- **Python **
+- **Python**
 - **PyTorch**
 - **spaCy**
 - **Transformers**
