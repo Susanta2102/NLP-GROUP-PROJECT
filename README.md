@@ -1,7 +1,7 @@
-# Thesis Title: Automating GDPR Compliance Checks Using NLP
+# Security Policy and Compliance Automation Using NLP
 
-## Overview
-This thesis explores the development of an automated tool for checking GDPR compliance within textual data, utilizing Natural Language Processing (NLP) techniques. The project aims to identify and categorize various GDPR principles across diverse privacy policies to assess compliance.
+## Project Overview
+This project focuses on automating the extraction and enforcement of security policies and compliance requirements from regulatory documents using Natural Language Processing (NLP). The tool uses advanced NLP techniques to identify, categorize, and check compliance with security policies, particularly for frameworks such as GDPR, HIPAA, and PCI DSS. The goal is to develop an automated solution to assess compliance, extract relevant information, and enforce security and privacy standards.
 
 ## Objectives
 - To develop a method for extracting relevant information from privacy policy texts.
@@ -11,17 +11,22 @@ This thesis explores the development of an automated tool for checking GDPR comp
 ## Installation
 
 ### Prerequisites
-- Python 
-- PyTorch 
-- spaCy 
-- Transformers 
+To run the project, you will need the following software:
+- **Python 3.7+**
+- **PyTorch**
+- **spaCy**
+- **Transformers**
+- **NLTK**
+- **Compliance Libraries** (for regulatory documents)
 
 ### Setup
-Clone the repository and install the required packages:
-```bash
-git clone 
-cd Group 34 PROJECT 5
-pip install -r requirements.txt
+To set up the project on your machine, follow these steps:
+
+1. Clone the repository:
+   ```bash
+   git clone <https://github.com/Susanta2102/NLP-GROUP-PROJECT>
+   cd Group 34 PROJECT 5
+   pip install -r requirements.txt
 ```
 
 ### Usage
