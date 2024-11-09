@@ -5,7 +5,7 @@ nltk
 plotly
 pandas
 pathlib
-base64
+base64==1.0.0
 wordcloud
 matplotlib
 altair
