@@ -1,0 +1,12 @@
+streamlit
+torch
+sentence-transformers
+nltk
+plotly
+pandas
+pathlib
+base64
+wordcloud
+matplotlib
+altair
+numpy
