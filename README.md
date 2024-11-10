@@ -8,6 +8,21 @@ This project focuses on automating the extraction and enforcement of security po
 - To apply NLP models to classify text according to GDPR compliance criteria.
 - To evaluate the effectiveness of different NLP models in identifying GDPR principles.
 
+## Primary Functions of the Application
+
+### Natural Language Processing for Compliance Check
+The app uses NLP models (SentenceTransformers and PyTorch) to analyze text data, which likely involves identifying phrases, sentences, or policies that relate to GDPR requirements.
+Sentence tokenization, powered by NLTK, helps break down text into smaller, analyzable units, enabling the model to analyze content more accurately.
+
+### User Interaction via Streamlit
+Streamlit provides an interface for users to input text, which the app processes for GDPR compliance. This user-friendly interface likely includes text input fields, buttons, and checkboxes to configure the analysis.
+
+### Visualization of Analysis Results
+Plotly is used to create interactive graphs or visual elements, making it easier for users to interpret the analysis results. The visuals might include metrics related to the text’s compliance level, highlight compliance issues, or show recommendations.
+
+### GDPR Compliance Reporting
+The app may provide a summary or compliance score based on text analysis, giving users insights into how their text aligns with GDPR standards and pinpointing areas that may need revision.
+
 ## Installation
 
 ### Prerequisites
@@ -24,13 +39,11 @@ To set up the project on your machine, follow these steps:
 
 1. Clone the repository:
    ```bash
-   git clone<https://github.com/Susanta2102/NLP-GROUP-PROJECT>
+   git clone https://github.com/Susanta2102/NLP-GROUP-PROJECT
    cd NLP-GROUP-PROJECT
    pip install -r requirements.txt
-```
 
-### Usage
-To run the GDPR compliance checker, execute:  
+
 
 ```bash
 streamlit run app.py
