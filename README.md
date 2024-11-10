@@ -23,6 +23,10 @@ Plotly is used to create interactive graphs or visual elements, making it easier
 ### GDPR Compliance Reporting
 The app may provide a summary or compliance score based on text analysis, giving users insights into how their text aligns with GDPR standards and pinpointing areas that may need revision.
 
+## Demo Video
+You can watch the demo of the project in action by clicking the link below:
+
+[Demo Video](https://github.com/Susanta2102/NLP-GROUP-PROJECT/blob/main/Demo.mp4)
 ## Installation
 
 ### Prerequisites
