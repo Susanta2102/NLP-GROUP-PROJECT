@@ -36,7 +36,6 @@ To run the GDPR compliance checker, execute:
 streamlit run app.py
 ```
 
-Then you can open the corresponding `your_policy_text file.html` in any browser of your choice and view the report!
 
 ## Contributions
 - **SusantA Baidya**: msa23009@iiitl.ac.in
