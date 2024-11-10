@@ -4,6 +4,7 @@ sentence-transformers
 nltk
 plotly
 pandas
+pathlib
 wordcloud
 matplotlib
 altair
