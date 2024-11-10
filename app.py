@@ -15,11 +15,14 @@ import time
 import textwrap
 import numpy as np
 
-# Download NLTK data
+
+
+# Attempt to download the Punkt tokenizer if it's not available
 try:
     nltk.data.find('tokenizers/punkt')
 except LookupError:
     nltk.download('punkt')
+
 
 # Configure Streamlit page
 st.set_page_config(
