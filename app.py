@@ -15,19 +15,11 @@ import time
 import textwrap
 import numpy as np
 
-# Download required NLTK data
-@st.cache_resource
-def download_nltk_data():
-    try:
-        nltk.download('punkt')
-        nltk.download('averaged_perceptron_tagger')
-        return True
-    except Exception as e:
-        st.error(f"Error downloading NLTK data: {str(e)}")
-        return False
-
-# Initialize NLTK data
-download_nltk_data()
+# Download NLTK data
+try:
+    nltk.data.find('tokenizers/punkt')
+except LookupError:
+    nltk.download('punkt')
 
 # Configure Streamlit page
 st.set_page_config(
