@@ -1,7 +1,6 @@
 streamlit
 torch
 sentence-transformers
-nltk
 plotly
 pandas
 pathlib
@@ -9,3 +8,4 @@ wordcloud
 matplotlib
 altair
 numpy
+nltk>=3.8.1
