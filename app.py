@@ -12,7 +12,6 @@ import base64
 from datetime import datetime
 import json
 import time
-from annotated_text import annotated_text
 import textwrap
 import numpy as np
 
