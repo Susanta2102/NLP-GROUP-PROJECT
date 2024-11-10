@@ -33,7 +33,7 @@ To set up the project on your machine, follow these steps:
 To run the GDPR compliance checker, execute:  
 
 ```bash
-python gdpr_compliance_checker.py your_policy_text_file.txt
+streamlit run app.py
 ```
 
 Then you can open the corresponding `your_policy_text file.html` in any browser of your choice and view the report!
