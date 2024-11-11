@@ -15,14 +15,11 @@ import time
 import textwrap
 import numpy as np
 
-
-
 # Attempt to download the Punkt tokenizer if it's not available
 try:
     nltk.data.find('tokenizers/punkt')
 except LookupError:
     nltk.download('punkt')
-
 
 # Configure Streamlit page
 st.set_page_config(
@@ -140,7 +137,6 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
-# ADD THE NEW RADAR CHART FUNCTION HERE, RIGHT BEFORE create_sunburst_chart
 def create_radar_chart(results):
     # Extract principles and scores
     principles = list(results.keys())
@@ -200,7 +196,6 @@ def create_radar_chart(results):
     
     return fig
 
-
 def create_sunburst_chart(compliance_results):
     # Prepare data for sunburst chart
     data = []
@@ -233,68 +228,7 @@ def create_sunburst_chart(compliance_results):
     
     return fig
 
-def create_timeline_analysis(sentences):
-    # Create timeline of policy statements
-    fig = go.Figure()
-    
-    y_positions = np.linspace(0, 1, len(sentences))
-    
-    for i, sentence in enumerate(sentences):
-        fig.add_trace(go.Scatter(
-            x=[i, i+1],
-            y=[y_positions[i], y_positions[i]],
-            mode='lines+markers',
-            name=textwrap.shorten(sentence, width=50),
-            line=dict(color='#1e3c72'),
-            hovertext=sentence
-        ))
-    
-    fig.update_layout(
-        showlegend=False,
-        height=300,
-        margin=dict(l=20, r=20, t=20, b=20),
-        xaxis_title="Statement Sequence",
-        yaxis_showticklabels=False
-    )
-    
-    return fig
-
-class GDPRComplianceAnalyzer:
-    def __init__(self):
-        self.history = []
-        
-    def add_analysis(self, policy_text, results, timestamp=None):
-        if timestamp is None:
-            timestamp = datetime.now()
-        
-        analysis = {
-            "timestamp": timestamp,
-            "policy_text": policy_text,
-            "results": results
-        }
-        
-        self.history.append(analysis)
-        
-    def get_trend_data(self):
-        if not self.history:
-            return None
-            
-        trend_data = []
-        for analysis in self.history:
-            compliant_count = sum(1 for r in analysis["results"].values() if r["compliant"])
-            compliance_score = compliant_count / len(analysis["results"]) * 100
-            trend_data.append({
-                "timestamp": analysis["timestamp"],
-                "compliance_score": compliance_score
-            })
-            
-        return pd.DataFrame(trend_data)
-
 def main():
-    # Initialize session state
-    if 'analyzer' not in st.session_state:
-        st.session_state.analyzer = GDPRComplianceAnalyzer()
-    
     # Initialize policy_text with empty string
     policy_text = ""
     
@@ -324,283 +258,128 @@ def main():
         with st.expander("📊 Visualization Options", expanded=True):
             show_radar = st.checkbox("Show Radar Chart", value=True)
             show_sunburst = st.checkbox("Show Sunburst Chart", value=True)
-            show_timeline = st.checkbox("Show Policy Timeline", value=True)
-        
-        with st.expander("📈 Analysis History", expanded=True):
-            if st.session_state.analyzer.history:
-                trend_data = st.session_state.analyzer.get_trend_data()
-                fig = px.line(trend_data, x='timestamp', y='compliance_score',
-                            title='Compliance Score Trend')
-                st.plotly_chart(fig, use_container_width=True)
     
-    # Main content
-    tab1, tab2 = st.tabs(["📝 Policy Analysis", "📊 Historical Analysis"])
+    # Input section
+    st.markdown("### 📄 Input Policy")
+    input_method = st.radio(
+        "Choose input method:",
+        ["Upload File", "Paste Text", "Use Sample"],
+        horizontal=True
+    )
     
-    with tab1:
-        # Input section
-        st.markdown("### 📄 Input Policy")
-        input_method = st.radio(
-            "Choose input method:",
-            ["Upload File", "Paste Text", "Use Sample"],
-            horizontal=True
-        )
-        
-        sample_text = """We are committed to protecting your privacy and handling your data in an open and transparent manner. 
-        We collect and process personal data in accordance with applicable laws and regulations.
-        The data we collect is limited to what is necessary for the purposes for which it is processed. 
-        We ensure that personal data is accurate and kept up to date.
-        We implement appropriate technical and organizational measures to ensure data security. 
-        We retain personal data only for as long as necessary.
-        We are accountable for demonstrating compliance with data protection principles."""
+    sample_text = """We are committed to protecting your privacy and handling your data in an open and transparent manner. 
+    We collect and process personal data in accordance with applicable laws and regulations.
+    The data we collect is limited to what is necessary for the purposes for which it is processed. 
+    We ensure that personal data is accurate and kept up to date.
+    We implement appropriate technical and organizational measures to ensure data security. 
+    We retain personal data only for as long as necessary.
+    We are accountable for demonstrating compliance with data protection principles."""
 
-        if input_method == "Upload File":
-            uploaded_file = st.file_uploader("Upload Privacy Policy (TXT)", type=['txt'])
-            if uploaded_file:
-                policy_text = uploaded_file.getvalue().decode()
-        elif input_method == "Paste Text":
-            policy_text = st.text_area("Enter policy text:", height=200)
-        else:  # Use Sample
-            policy_text = sample_text
-            st.text_area("Sample policy text:", value=policy_text, height=200, disabled=True)
-        
-        if st.button("🔍 Analyze Policy", disabled=not policy_text):
-            with st.spinner("🔄 Analyzing policy..."):
-                # Simulate analysis for demo
-                progress_bar = st.progress(0)
-                for i in range(100):
-                    time.sleep(0.01)
-                    progress_bar.progress(i + 1)
-                
-                # Analysis results (simplified for demo)
-                results = {
-                    "Lawfulness, Fairness and Transparency": {"compliant": True, "score": 0.9, "example": "Sample text"},
-                    "Purpose Limitation": {"compliant": True, "score": 0.85, "example": "Sample text"},
-                    "Data Minimization": {"compliant": False, "score": 0.6},
-                    "Accuracy": {"compliant": True, "score": 0.95, "example": "Sample text"},
-                    "Storage Limitation": {"compliant": True, "score": 0.88, "example": "Sample text"},
-                    "Integrity and Confidentiality": {"compliant": False, "score": 0.7},
-                    "Accountability": {"compliant": True, "score": 0.92, "example": "Sample text"}
-                }
-                
-                # Add to history
-                st.session_state.analyzer.add_analysis(policy_text, results)
-                
-                # Results section
-                st.markdown("### 📊 Analysis Results")
-                
-                # Summary metrics
-                col1, col2, col3, col4 = st.columns(4)
-                compliant_count = sum(1 for r in results.values() if r["compliant"])
-                
-                with col1:
-                    st.metric("✅ Compliant", compliant_count)
-                with col2:
-                    st.metric("❌ Non-compliant", len(results) - compliant_count)
-                with col3:
-                    compliance_score = compliant_count / len(results) * 100
-                    st.metric("📈 Overall Score", f"{compliance_score:.1f}%")
-                with col4:
-                    avg_score = np.mean([r["score"] for r in results.values() if "score" in r])
-                    st.metric("⭐ Average Score", f"{avg_score:.2f}")
-                
-                # Visualizations
-                col1, col2 = st.columns(2)
-                
-                if show_radar:
-                    with col1:
-                        st.plotly_chart(create_radar_chart(results), use_container_width=True)
-                
-                if show_sunburst:
-                    with col2:
-                        st.plotly_chart(create_sunburst_chart(results), use_container_width=True)
-                
-                if show_timeline:
-                    st.markdown("### 📈 Policy Statement Timeline")
-                    sentences = sent_tokenize(policy_text)
-                    st.plotly_chart(create_timeline_analysis(sentences), use_container_width=True)
-                
-                # Detailed findings
-                st.markdown("### 🔍 Detailed Findings")
-                
-                for principle, details in results.items():
-                    with st.expander(
-                        f"{'✅' if details['compliant'] else '❌'} {principle} "
-                        f"({'Compliant' if details['compliant'] else 'Non-compliant'})"
-                    ):
-                        if details["compliant"]:
-                            st.markdown(f"""
-                            <div class='principle-card compliant'>
-                                <h4>Status: ✅ Compliant</h4>
-                                <p><strong>Confidence Score:</strong> {details['score']:.2f}</p>
-                                <p><strong>Example Statement:</strong> "{details['example']}"</p>
-                                <p><strong>Recommendation:</strong> Continue maintaining current standards.</p>
-                            </div>
-                            """, unsafe_allow_html=True)
-                        else:
-                            st.markdown(f"""
-                            <div class='principle-card non-compliant'>
-                                <h4>Status: ❌ Non-compliant</h4>
-                                <p><strong>Confidence Score:</strong> {details.get('score', 0):.2f}</p>
-                                <p><strong>Recommendation:</strong> Add specific clauses addressing {principle}.</p>
-                                <p><strong>Suggested Improvements:</strong></p>
-                                <ul>
-                                    <li>Include explicit statements about {principle}</li>
-                                    <li>Define clear procedures and policies</li>
-                                    <li>Provide specific examples of implementation</li>
-                                </ul>
-                            </div>
-                            """, unsafe_allow_html=True)
-                
-                # Export options
-                st.markdown("### 📑 Export Options")
-                col1, col2, col3 = st.columns(3)
-                
-                with col1:
-                    if st.button("📄 Export as PDF"):
-                        st.info("Generating PDF report...")
-                        time.sleep(1)
-                        st.success("PDF report ready!")
-                
-                with col2:
-                    if st.button("📊 Export as Excel"):
-                        st.info("Generating Excel report...")
-                        time.sleep(1)
-                        st.success("Excel report ready!")
-                
-                with col3:
-                    if st.button("💾 Save Analysis"):
-                        st.success("Analysis saved to history!")
-
-    with tab2:
-        st.markdown("### 📈 Historical Analysis")
-        
-        if not st.session_state.analyzer.history:
-            st.info("No historical data available yet. Analyze some policies to see trends.")
-        else:
-            # Historical trends
-            st.markdown("#### Compliance Score Trends")
-            trend_data = st.session_state.analyzer.get_trend_data()
-            fig = px.line(trend_data, x='timestamp', y='compliance_score',
-                         title='Compliance Score History')
-            st.plotly_chart(fig, use_container_width=True)
+    if input_method == "Upload File":
+        uploaded_file = st.file_uploader("Upload Privacy Policy (TXT)", type=['txt'])
+        if uploaded_file:
+            policy_text = uploaded_file.getvalue().decode()
+    elif input_method == "Paste Text":
+        policy_text = st.text_area("Enter policy text:", height=200)
+    else:  # Use Sample
+        policy_text = sample_text
+        st.text_area("Sample policy text:", value=policy_text, height=200, disabled=True)
+    
+    if st.button("🔍 Analyze Policy", disabled=not policy_text):
+        with st.spinner("🔄 Analyzing policy..."):
+            # Simulate analysis for demo
+            progress_bar = st.progress(0)
+            for i in range(100):
+                time.sleep(0.01)
+                progress_bar.progress(i + 1)
             
-            # Historical comparison
-            st.markdown("#### Analysis History")
-            for idx, analysis in enumerate(reversed(st.session_state.analyzer.history)):
-                with st.expander(f"Analysis {len(st.session_state.analyzer.history) - idx} - "
-                               f"{analysis['timestamp'].strftime('%Y-%m-%d %H:%M:%S')}"):
-                    compliant_count = sum(1 for r in analysis["results"].values() if r["compliant"])
-                    compliance_score = compliant_count / len(analysis["results"]) * 100
-                    
-                    col1, col2 = st.columns(2)
-                    with col1:
-                        st.metric("Compliance Score", f"{compliance_score:.1f}%")
-                    with col2:
-                        st.metric("Compliant Principles", compliant_count)
-                    
-                    st.markdown("##### Policy Text Preview")
-                    st.text(textwrap.shorten(analysis["policy_text"], width=200))
-
-# Add feature for downloading reports
-def generate_pdf_report(results):
-    # Placeholder for PDF generation functionality
-    pass
-
-def generate_excel_report(results):
-    # Placeholder for Excel generation functionality
-    pass
-
-def save_analysis_history():
-    # Placeholder for saving analysis history
-    pass
-
-# Add feature for real-time policy suggestions
-def generate_policy_suggestions(non_compliant_principles):
-    suggestions = {
-        "Lawfulness, Fairness and Transparency": [
-            "Include explicit consent mechanisms",
-            "Clearly state legal bases for processing",
-            "Provide transparent data collection practices"
-        ],
-        "Purpose Limitation": [
-            "Specify clear purposes for data collection",
-            "Define data usage boundaries",
-            "Document purpose changes"
-        ],
-        "Data Minimization": [
-            "Implement data collection limits",
-            "Regular data relevance reviews",
-            "Clear data retention policies"
-        ],
-        "Accuracy": [
-            "Regular data verification procedures",
-            "User data update mechanisms",
-            "Data quality checks"
-        ],
-        "Storage Limitation": [
-            "Define retention periods",
-            "Implement deletion procedures",
-            "Regular storage reviews"
-        ],
-        "Integrity and Confidentiality": [
-            "Security measures documentation",
-            "Access control policies",
-            "Encryption standards"
-        ],
-        "Accountability": [
-            "Documentation of compliance",
-            "Regular audits",
-            "Staff training programs"
-        ]
-    }
-    return suggestions
-
-# Add machine learning model handling
-class ModelManager:
-    def __init__(self):
-        self.models = {}
-        self.last_update = None
-    
-    def load_model(self, model_name):
-        if model_name not in self.models:
-            # Load model implementation
-            pass
-        return self.models[model_name]
-    
-    def update_models(self):
-        # Model update implementation
-        pass
-
-# Add data preprocessing utilities
-def preprocess_policy_text(text):
-    # Remove extra whitespace
-    text = " ".join(text.split())
-    
-    # Split into sentences
-    sentences = sent_tokenize(text)
-    
-    # Remove very short sentences
-    sentences = [s for s in sentences if len(s.split()) > 5]
-    
-    return sentences
-
-# Add caching for improved performance
-@st.cache_data
-def get_cached_analysis(policy_text, threshold):
-    # Implement caching logic
-    pass
-
-# Add feature for comparative analysis
-def compare_policies(policy1_results, policy2_results):
-    comparison = {}
-    for principle in policy1_results.keys():
-        comparison[principle] = {
-            "policy1_score": policy1_results[principle].get("score", 0),
-            "policy2_score": policy2_results[principle].get("score", 0),
-            "difference": policy1_results[principle].get("score", 0) - 
-                         policy2_results[principle].get("score", 0)
-        }
-    return comparison
+            # Analysis results (simplified for demo)
+            results = {
+                "Lawfulness, Fairness and Transparency": {"compliant": True, "score": 0.9, "example": "Sample text"},
+                "Purpose Limitation": {"compliant": True, "score": 0.85, "example": "Sample text"},
+                "Data Minimization": {"compliant": False, "score": 0.6},
+                "Accuracy": {"compliant": True, "score": 0.95, "example": "Sample text"},
+                "Storage Limitation": {"compliant": True, "score": 0.88, "example": "Sample text"},
+                "Integrity and Confidentiality": {"compliant": False, "score": 0.7},
+                "Accountability": {"compliant": True, "score": 0.92, "example": "Sample text"}
+            }
+            
+            # Results section
+            st.markdown("### 📊 Analysis Results")
+            
+            # Summary metrics
+            col1, col2, col3, col4 = st.columns(4)
+            compliant_count = sum(1 for r in results.values() if r["compliant"])
+            
+            with col1:
+                st.metric("✅ Compliant", compliant_count)
+            with col2:
+                st.metric("❌ Non-compliant", len(results) - compliant_count)
+            with col3:
+                compliance_score = compliant_count / len(results) * 100
+                st.metric("📈 Overall Score", f"{compliance_score:.1f}%")
+            with col4:
+                avg_score = np.mean([r["score"] for r in results.values() if "score" in r])
+                st.metric("⭐ Average Score", f"{avg_score:.2f}")
+            
+            # Visualizations
+            col1, col2 = st.columns(2)
+            
+            if show_radar:
+                with col1:
+                    st.plotly_chart(create_radar_chart(results), use_container_width=True)
+            
+            if show_sunburst:
+                with col2:
+                    st.plotly_chart(create_sunburst_chart(results), use_container_width=True)
+            
+            # Detailed findings
+            st.markdown("### 🔍 Detailed Findings")
+            
+            for principle, details in results.items():
+                with st.expander(
+                    f"{'✅' if details['compliant'] else '❌'} {principle} "
+                    f"({'Compliant' if details['compliant'] else 'Non-compliant'})"
+                ):
+                    if details["compliant"]:
+                        st.markdown(f"""
+                        <div class='principle-card compliant'>
+                            <h4>Status: ✅ Compliant</h4>
+                            <p><strong>Confidence Score:</strong> {details['score']:.2f}</p>
+                            <p><strong>Example Statement:</strong> "{details['example']}"</p>
+                            <p><strong>Recommendation:</strong> Continue maintaining current standards.</p>
+                        </div>
+                        """, unsafe_allow_html=True)
+                    else:
+                        st.markdown(f"""
+                        <div class='principle-card non-compliant'>
+                            <h4>Status: ❌ Non-compliant</h4>
+                            <p><strong>Confidence Score:</strong> {details.get('score', 0):.2f}</p>
+                            <p><strong>Recommendation:</strong> Add specific clauses addressing {principle}.</p>
+                            <p><strong>Suggested Improvements:</strong></p>
+                            <ul>
+                                <li>Include explicit statements about {principle}</li>
+                                <li>Define clear procedures and policies</li>
+                                <li>Provide specific examples of implementation</li>
+                            </ul>
+                        </div>
+                        """, unsafe_allow_html=True)
+            
+            # Export options
+            st.markdown("### 📑 Export Options")
+            col1, col2 = st.columns(2)
+            
+            with col1:
+                if st.button("📄 Export as PDF"):
+                    st.info("Generating PDF report...")
+                    time.sleep(1)
+                    st.success("PDF report ready!")
+            
+            with col2:
+                if st.button("📊 Export as Excel"):
+                    st.info("Generating Excel report...")
+                    time.sleep(1)
+                    st.success("Excel report ready!")
 
 if __name__ == "__main__":
     main()
