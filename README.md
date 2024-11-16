@@ -4,8 +4,6 @@
 [![GDPR Compliance](https://img.shields.io/badge/GDPR-Compliant-green.svg)](https://gdpr.eu/)
 [![HIPAA](https://img.shields.io/badge/HIPAA-Ready-blue.svg)](https://www.hhs.gov/hipaa/index.html)
 [![PCI DSS](https://img.shields.io/badge/PCI%20DSS-Compatible-orange.svg)](https://www.pcisecuritystandards.org/)
-[![Python](https://img.shields.io/badge/Python-3.8+-yellow.svg)](https://www.python.org/)
-[![License](https://img.shields.io/badge/License-MIT-purple.svg)](LICENSE)
 
 ## 📋 Overview
 
