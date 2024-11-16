@@ -25,7 +25,7 @@ The app may provide a summary or compliance score based on text analysis, giving
 
 ## Demo Video
 You can watch the demo of the project in action by clicking the link below:
-
+[Demo Video to run the script](https://github.com/Susanta2102/NLP-GROUP-PROJECT/blob/main/Demo%20Video%20to%20run%20the%20script.mp4)
 [Demo Video](https://github.com/Susanta2102/NLP-GROUP-PROJECT/blob/main/Demo.mp4)
 ## Installation
 
