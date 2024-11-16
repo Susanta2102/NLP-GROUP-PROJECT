@@ -48,16 +48,18 @@ To set up the project on your machine, follow these steps:
    pip install -r requirements.txt
 
 
-
-```bash
-streamlit run main.py
-```
-or
 ```bash
 python gdpr_compliance_checker.py sample.txt
 ```
 ![Report Sample](https://github.com/Susanta2102/NLP-GROUP-PROJECT/raw/main/1.png)
 
+or
+```bash
+streamlit run main.py
+```
+![Streamlit Interface](https://github.com/Susanta2102/NLP-GROUP-PROJECT/raw/main/2.png)
+![Streamlit Interface](https://github.com/Susanta2102/NLP-GROUP-PROJECT/raw/main/3.png)
+![Streamlit Interface](https://github.com/Susanta2102/NLP-GROUP-PROJECT/raw/main/4.png)
 
 
 ## Contributions
