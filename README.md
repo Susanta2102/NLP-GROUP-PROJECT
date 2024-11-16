@@ -40,17 +40,14 @@ Built with Streamlit for maximum usability:
 ### 📈 Interactive Visualizations
 Powered by Plotly for comprehensive data representation:
 - Dynamic compliance dashboards
-- Risk assessment heat maps
 - Temporal compliance tracking
 - Policy coverage visualization
-- Impact analysis graphs
 
 ### 📝 Comprehensive Reporting
 Detailed analysis and actionable insights:
 - GDPR compliance scoring
 - Section-by-section analysis
 - Policy gap identification
-- Remediation recommendations
 - Exportable compliance reports
 
 ## 🛠 Technical Architecture
@@ -86,7 +83,7 @@ Experience our solution in action through our comprehensive demo videos:
 Ensure you have the following installed:
 
 ```bash
-Python 3.8+
+Python 3.10+
 PyTorch
 spaCy
 Transformers
@@ -164,37 +161,18 @@ Our dedicated team of developers and researchers:
 
 | Name | Email | Role | Responsibilities |
 |------|--------|------|-----------------|
-| SusantA Baidya | msa23009@iiitl.ac.in | Team Lead | Project coordination, Architecture design |
-| Anjali Tamta | msa23026@iiitl.ac.in | NLP Engineer | Model development, Algorithm optimization |
-| Sapna Kumari | msa23001@iiitl.ac.in | Backend Developer | API development, Database management |
+| Susanta Baidya | msa23009@iiitl.ac.in | Team Lead | Project coordination, Architecture design |
+| Anjali Tamta | msa23026@iiitl.ac.in | NLP Implementation | Model development, Algorithm optimization |
+| Vikrant Kumar | msa23001@iiitl.ac.in | Backend Developer | API development, Database management |
 | Akanksha Kumari | msa23003@iiitl.ac.in | UI/UX Designer | Interface design, User experience |
-| Vikrant Kumad | msa23016@iiitl.ac.in | Data Scientist | Data analysis, Model training |
+| Sapna Kumari | msa23016@iiitl.ac.in | Data Science | Data analysis, Model training |
 
-## 📚 Documentation
-
-Comprehensive documentation is available in the `/docs` directory:
-- [Installation Guide](docs/installation.md)
-- [User Manual](docs/user-manual.md)
-- [API Reference](docs/api-reference.md)
-- [Contributing Guidelines](docs/contributing.md)
-
-## 🔄 Updates and Versioning
-
-We use [SemVer](http://semver.org/) for version control. For available versions, see the [tags on this repository](https://github.com/Susanta2102/NLP-GROUP-PROJECT/tags).
-
-## 📄 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## 🤝 Contributing
-
-We welcome contributions! Please read our [Contributing Guidelines](CONTRIBUTING.md) before submitting pull requests.
 
 ## 📮 Contact
 
 For support or queries, please contact:
 - Project Lead: SusantA Baidya (msa23009@iiitl.ac.in)
-- Technical Support: support@nlpcomplianceproject.dev
+- Technical Support: susantabaidya20133@gmail.com
 
 ## 🙏 Acknowledgments
 
