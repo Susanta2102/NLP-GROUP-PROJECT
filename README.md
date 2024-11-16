@@ -161,9 +161,9 @@ Our dedicated team of developers and researchers:
 |------|--------|------|-----------------|
 | Susanta Baidya | msa23009@iiitl.ac.in | Team Lead | Project coordination, Architecture design |
 | Anjali Tamta | msa23026@iiitl.ac.in | NLP Implementation | Model development, Algorithm optimization |
-| Vikrant Kumar | msa23001@iiitl.ac.in | Backend Developer | API development, Database management |
+| Vikrant Kumar | msa23016@iiitl.ac.in | Backend Developer | API development, Database management |
 | Akanksha Kumari | msa23003@iiitl.ac.in | UI/UX Designer | Interface design, User experience |
-| Sapna Kumari | msa23016@iiitl.ac.in | Data Science | Data analysis, Model training |
+| Sapna Kumari | msa23001@iiitl.ac.in | Data Science | Data analysis, Model training |
 
 
 ## 📮 Contact
