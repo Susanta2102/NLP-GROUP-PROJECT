@@ -56,6 +56,8 @@ or
 ```bash
 python gdpr_compliance_checker.py sample.txt
 ```
+![Report Sample](https://github.com/Susanta2102/NLP-GROUP-PROJECT/raw/main/1.png)
+
 
 
 ## Contributions
