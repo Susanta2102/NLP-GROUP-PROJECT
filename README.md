@@ -52,6 +52,10 @@ To set up the project on your machine, follow these steps:
 ```bash
 streamlit run app.py
 ```
+or
+```bash
+python gdpr_compliance_checker.py sample.txt
+```
 
 
 ## Contributions
