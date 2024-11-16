@@ -50,7 +50,7 @@ To set up the project on your machine, follow these steps:
 
 
 ```bash
-streamlit run app.py
+streamlit run main.py
 ```
 or
 ```bash
